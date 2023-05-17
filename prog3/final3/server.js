@@ -22,9 +22,10 @@ let GrassEater = require("./grasseater")
 let AllEater = require("./alleater")
 let Bomb = require("./bomb")
 let Water = require("./water")
+let Fire = require("./fire")
 
 matrix = []
-function generateMatrix(size, countGrass, countGrassEater, countAllEater, countBomb, countWater) {
+function generateMatrix(size, countGrass, countGrassEater, countAllEater, countBomb, countWater, countFire) {
     for (let i = 0; i < size; i++) {
         matrix.push([])
         for (let j = 0; j < size; j++) {
@@ -59,6 +60,11 @@ function generateMatrix(size, countGrass, countGrassEater, countAllEater, countB
         let y = Math.floor(getRandInt(0, size - 1))
         matrix[y][x] = 5
     }
+    for (let k = 0; k < countFire; k++) {
+        let x = Math.floor(getRandInt(0, size - 1))
+        let y = Math.floor(getRandInt(0, size - 1))
+        matrix[y][x] = 6
+    }
     io.emit("send matrix", matrix)
     return matrix
 }
@@ -68,11 +74,12 @@ grassEaterArr = [];
 allEaterArr = [];
 bombArr = [];
 waterArr = [];
+fireArr = [];
 
 
 
-matrix = generateMatrix(50, 50, 20, 60, 8, 10, 25);
-function objects(){
+matrix = generateMatrix(50, 50, 20, 60, 8, 10, 25, 35);
+function objects() {
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] === 1) {
@@ -95,16 +102,15 @@ function objects(){
                 let water = new Water(x, y);
                 waterArr.push(water);
             }
+            else if (matrix[y][x] === 6) {
+                let fire = new Fire(x, y);
+                fireArr.push(fire);
+            }
         }
-       
+
     }
     io.emit("send matrix", matrix)
 }
-
-
-
-
-
 
 objects()
 function game() {
@@ -117,21 +123,22 @@ function game() {
     }
 
     for (let i = 0; i < allEaterArr.length; i++) {
-        
+
         allEaterArr[i].eat()
     }
+   
     for (let i = 0; i < bombArr.length; i++) {
         bombArr[i].eat()
-        
-       
 
-    }
-    for (let i = 0; i < waterArr.length; i++) {
+   }
+   
+   for (let i = 0; i < waterArr.length; i++) {
         waterArr[i].mul()
-        
-       
-
-    }
+  }
+   
+  for (let i = 0; i < fireArr.length; i++) {
+        fireArr[i].eat()
+  }
 
 
     io.emit("send matrix", matrix)

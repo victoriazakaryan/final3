@@ -70,7 +70,7 @@ module.exports = class Bomb extends LivingCreature {
     // //   let found2 = this.chooseCell(3)
     //   let found = [found1, found2 ]
       let oneCell =this.random(2,3,1);
-      console.log(oneCell);
+     
       
     //   let oneCell = this.random(randomfound)
       
