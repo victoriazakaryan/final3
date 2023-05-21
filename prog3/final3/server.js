@@ -17,12 +17,12 @@ function getRandInt(min, max) {
     return z;
 }
 
-let Grass = require("./grass")
-let GrassEater = require("./grasseater")
-let AllEater = require("./alleater")
-let Bomb = require("./bomb")
-let Water = require("./water")
-let Fire = require("./fire")
+let Grass = require("./modules/grass")
+let GrassEater = require("./modules/grasseater")
+let AllEater = require("./modules/alleater")
+let Bomb = require("./modules/bomb")
+let Water = require("./modules/water")
+let Fire = require("./modules/fire")
 
 matrix = []
 function generateMatrix(size, countGrass, countGrassEater, countAllEater, countBomb, countWater, countFire) {

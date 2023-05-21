@@ -12,7 +12,7 @@ function setup() {
 }
 let color = ["", "green", "yellow", "#00cc99", "black", "blue","red"]
 function draw2(matrix) {
-    // console.log(grassArr)
+    
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             fill(color[matrix[y][x]])
@@ -26,6 +26,7 @@ function draw2(matrix) {
 socket.on("send matrix", draw2)
 
 const title = document.querySelector("h1");
+
 
 const winterBtn = document.getElementById("winter")
 let winter = ["", "#dfd6cd", "#fff0a9", "#ec33ec", "black", "#bebebe", "red"]
@@ -52,6 +53,7 @@ let summer = ["", "green", "yellow", "#ff97d1", "black", "#a7d8de", "red"]
 summerBtn.addEventListener("click", () => {
     color = summer;
 })
+
 
 
 
