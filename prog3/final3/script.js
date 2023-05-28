@@ -12,7 +12,9 @@ function setup() {
 }
 let color = ["", "green", "yellow", "#00cc99", "black", "blue","red"]
 function draw2(matrix) {
-    
+
+    console.log(matrix.statistic)
+
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             fill(color[matrix[y][x]])
@@ -24,6 +26,7 @@ function draw2(matrix) {
 
 
 socket.on("send matrix", draw2)
+
 
 const title = document.querySelector("h1");
 

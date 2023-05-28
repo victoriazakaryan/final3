@@ -24,6 +24,8 @@ let Bomb = require("./modules/bomb")
 let Water = require("./modules/water")
 let Fire = require("./modules/fire")
 
+
+
 matrix = []
 function generateMatrix(size, countGrass, countGrassEater, countAllEater, countBomb, countWater, countFire) {
     for (let i = 0; i < size; i++) {
@@ -36,7 +38,7 @@ function generateMatrix(size, countGrass, countGrassEater, countAllEater, countB
     for (let k = 0; k < countGrass; k++) {
         let x = Math.floor(getRandInt(0, size - 1))
         let y = Math.floor(getRandInt(0, size - 1))
-        // console.log(matrix);
+        
 
         matrix[y][x] = 1
     }
@@ -114,6 +116,7 @@ function objects() {
 
 objects()
 function game() {
+
     for (let i = 0; i < grassArr.length; i++) {
         grassArr[i].mul()
     }
@@ -139,10 +142,22 @@ function game() {
   for (let i = 0; i < fireArr.length; i++) {
         fireArr[i].eat()
   }
-
-
+  var obj = {
+    grass : grassArr.length,
+    grassEater : grassEaterArr.length,
+    allEater : allEaterArr.length,
+    bomb : bombArr.length,
+    water : waterArr.length,
+    fire : fireArr.length,
+    
+}
+let sendMatrix = {
+       statistic : obj,
+       matrix : matrix,
+}
+  
+   io.sockets.emit("send matrix", sendMatrix)
     io.emit("send matrix", matrix)
-
 }
 
 setInterval(game, 200)
